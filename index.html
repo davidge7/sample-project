@@ -13,9 +13,11 @@
             border: 5px red solid;
             border-radius: 2px;
             display: flex;
-            justify-content: center; /*aligns horizantally*/
-            align-items: center; /* alligns vertically */
-            max-height: 100vh;  
+            justify-content: center;
+            /*aligns horizantally*/
+            align-items: center;
+            /* alligns vertically */
+            max-height: 100vh;
         }
 
         .division {
@@ -34,14 +36,46 @@
             font-size: 1.1rem;
             line-height: 2.0;
         }
+
+        #date {
+            font-weight: bold;
+            font-size: 2rem;
+            color: black
+        }
+
+        button {
+            transition: background-color 3s ease;
+            border-radius: 8px;
+            width: auto;
+            background-color: beige;
+
+        }
+
+        button:hover {
+            background-color: violet;
+        }
     </style>
+    <script>
+        function autorefreshDate() {
+            setInterval(() => {
+                document.getElementById('date').innerHTML = "Date: " + new Date().toLocaleString();
+            }, 1000);
+        }
+        function displayDate() {
+            const dateElement = document.getElementById('date');
+            dateElement.style.display = (dateElement.style.display === 'none') ? 'inline-block' : 'none';
+        }
+    </script>
 </head>
 
-<body>
+<body onload="autorefreshDate()">
     <div class="division">
         <h1 id="headding">"THIS IS MY FIRST HTML PROJECT"</h1>
         <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing
             layouts and visual mockups.</p>
+        <p id="date">Date:
+        </p>
+        <button onclick="displayDate()">DISPLAY DATE</button>
     </div>
 
 </body>
