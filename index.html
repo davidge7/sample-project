@@ -2,82 +2,249 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            /* background: linear-gradient(135deg, #fdfbfb, #ebedee); */
-            background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
-            color: blue;
-            border: 5px red solid;
-            border-radius: 2px;
-            display: flex;
-            justify-content: center;
-            /*aligns horizantally*/
-            align-items: center;
-            /* alligns vertically */
-            max-height: 100vh;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enhanced Form Table</title>
+  <style>
+    body {
+      background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+      color: blue;
+      border: 5px red solid;
+      border-radius: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
 
-        .division {
-            max-width: 400px;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-        }
+    .division {
+      max-width: 800px;
+      width: 95%;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      background-color: #ffffffd4;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    }
 
-        #headding {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+    #headding {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
 
-        p {
-            font-size: 1.1rem;
-            line-height: 2.0;
-        }
+    p {
+      font-size: 1.1rem;
+      line-height: 2.0;
+    }
 
-        #date {
-            font-weight: bold;
-            font-size: 2rem;
-            color: black
-        }
+    #date {
+      font-weight: bold;
+      font-size: 2rem;
+      color: black;
+      margin-bottom: 20px;
+    }
 
-        button {
-            transition: background-color 3s ease;
-            border-radius: 8px;
-            width: auto;
-            background-color: beige;
+    button,
+    input[type="submit"] {
+      transition: background-color 0.3s ease;
+      border-radius: 8px;
+      padding: 10px 20px;
+      background-color: beige;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      margin: 5px;
+    }
 
-        }
+    button:hover {
+      background-color: violet;
+    }
 
-        button:hover {
-            background-color: violet;
-        }
-    </style>
-    <script>
-        function autorefreshDate() {
-            setInterval(() => {
-                document.getElementById('date').innerHTML = "Date: " + new Date().toLocaleString();
-            }, 1000);
-        }
-        function displayDate() {
-            const dateElement = document.getElementById('date');
-            dateElement.style.display = (dateElement.style.display === 'none') ? 'inline-block' : 'none';
-        }
-    </script>
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 2px solid #333;
+    }
+
+    th {
+      background-color: #6cc3a5;
+      color: white;
+      padding: 10px;
+      font-size: 1.1rem;
+    }
+
+    td {
+      background-color: #f0f0f0;
+      padding: 10px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    form {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+      font-size: 1rem;
+    }
+
+    .action-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      margin: 2px;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+    }
+
+    .download-btn {
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
 </head>
 
 <body onload="autorefreshDate()">
-    <div class="division">
-        <h1 id="headding">"THIS IS MY FIRST HTML PROJECT"</h1>
-        <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing
-            layouts and visual mockups.</p>
-        <p id="date">Date:
-        </p>
-        <button onclick="displayDate()">DISPLAY DATE</button>
-    </div>
+  <div class="division">
+    <h1 id="headding">"THIS IS MY FIRST HTML PROJECT"</h1>
+    <p>Lorem ipsum is placeholder text commonly used in publishing industries for previewing layouts and mockups.</p>
+    <p id="date">Date:</p>
+    <button onclick="displayDate()">DISPLAY DATE</button>
 
+    <h2>User Form</h2>
+    <form id="userForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <button class="download-btn" onclick="downloadJSON()">Download JSON</button>
+    <button class="download-btn" onclick="downloadCSV()">Download CSV</button>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    let dataList = JSON.parse(localStorage.getItem("dataList")) || [];
+    const form = document.getElementById("userForm");
+    const tableBody = document.querySelector("#dataTable tbody");
+
+    function autorefreshDate() {
+      setInterval(() => {
+        document.getElementById("date").innerHTML = "Date: " + new Date().toLocaleString();
+      }, 1000);
+    }
+
+    function displayDate() {
+      const dateElement = document.getElementById("date");
+      dateElement.style.display = (dateElement.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem("dataList", JSON.stringify(dataList));
+    }
+
+    function updateTable() {
+      tableBody.innerHTML = "";
+      dataList.forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${item.email}</td>
+          <td>${item.name}</td>
+          <td>
+            <button class="action-btn" onclick="editEntry(${index})">Edit</button>
+            <button class="action-btn delete-btn" onclick="deleteEntry(${index})">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function editEntry(index) {
+      const item = dataList[index];
+      document.getElementById("name").value = item.name;
+      document.getElementById("email").value = item.email;
+
+      dataList.splice(index, 1); // remove to overwrite
+      updateTable();
+      saveToLocalStorage();
+    }
+
+    function deleteEntry(index) {
+      if (confirm("Are you sure you want to delete this entry?")) {
+        dataList.splice(index, 1);
+        updateTable();
+        saveToLocalStorage();
+      }
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (name && email) {
+        dataList.push({ name, email });
+        saveToLocalStorage();
+        updateTable();
+        form.reset();
+      }
+    });
+
+    function downloadJSON() {
+      const blob = new Blob([JSON.stringify(dataList, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "data.json";
+      link.click();
+    }
+
+    function downloadCSV() {
+      const header = "Sl No,Email,Name\n";
+      const rows = dataList.map((item, i) => `${i + 1},${item.email},${item.name}`).join("\n");
+      const blob = new Blob([header + rows], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "data.csv";
+      link.click();
+    }
+
+    // Load existing data
+    updateTable();
+  </script>
 </body>
 
 </html>
